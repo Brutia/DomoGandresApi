@@ -32,12 +32,8 @@ class VoletController extends Controller{
 
 	public function stop(Request $request){
 		$gpio = new Gpio();
-
-		// $gpio->setPinMode(1, "out");
-		// $gpio->setPinMode(2, "out");
 		$gpio->setPinState(1,1);
     	$gpio->setPinState(2,1);
-		// sleep(1);
 		return response()->jsonp($request->query("callback"), "ok");
 	}
 
@@ -50,5 +46,11 @@ class VoletController extends Controller{
         $command = 'php '.base_path().'/artisan wait:volet --env='.$environment.' &';
         // execute
         exec($command);
+	}
+	
+	public function test(Request $request){
+		$gpio = new Gpio();
+		$gpio->test();
+		return response()->jsonp($request->query("callback"), "ok");
 	}
 }

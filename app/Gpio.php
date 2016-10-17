@@ -10,16 +10,25 @@ class Gpio {
 			10=>16,12=>1,16=>4,18=>5,22=>6,24=>10,26=>11);
 	}
 	public function setPinMode($pin, $mode){
-		system("gpio mode ".$pin." ".$mode);
+		exec("gpio mode ".$pin." ".$mode);
 	}
 	public function getPinState($pin){
 		$return = array();
-		system("gpio read ".$pin,$return);
+		exec("gpio read ".$pin,$return);
 		return (trim($return[0])=="1"?'on':'off');
 	}
 	
 	public function setPinState($pin, $state){
-		system("gpio write ".$pin." ".$state);
+		exec("gpio write ".$pin." ".$state);
+	}
+	
+	public function test(){
+		exec("sleep 10 > /dev/null 2>/dev/null &");
+	}
+	
+	public function fermerTemp(){
+		$request->query("temp");
+		exec("")
 	}
 	
 	
